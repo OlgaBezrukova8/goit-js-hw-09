@@ -37,18 +37,21 @@ flatpickr(
 );
 
 function onClickButtonStart() {
+  refs.inputText.setAttribute('disabled', 'true');
+  refs.buttonStart.setAttribute('disabled', 'true');
+
   timerId = setInterval(() => {
     const currentTime = new Date().getTime();
     const time = Date.parse(selectedDate) - currentTime;
 
-    convertMs(time);
+    if (time > 0) {
+      convertMs(time);
+    } else {
+      clearInterval(timerId);
+    }
   }, 1000);
 
-  //   if (timerId < 0) {
-  //     clearInterval(timerId);
-  //   }
-
-  //   console.log(timerId);
+  
 }
 
 function addLeadingZero(value) {
