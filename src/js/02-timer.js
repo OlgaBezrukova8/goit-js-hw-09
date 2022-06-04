@@ -1,5 +1,6 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 refs = {
   inputText: document.querySelector('input[type="text"]'),
@@ -28,7 +29,7 @@ flatpickr(
       console.log(selectedDates[0]);
 
       if (Date.parse(selectedDates) <= Date.now()) {
-        window.alert('Please choose a date in the future');
+        Notify.info('Please choose a date in the future');
       } else {
         refs.buttonStart.removeAttribute('disabled');
       }
@@ -50,8 +51,6 @@ function onClickButtonStart() {
       clearInterval(timerId);
     }
   }, 1000);
-
-  
 }
 
 function addLeadingZero(value) {
