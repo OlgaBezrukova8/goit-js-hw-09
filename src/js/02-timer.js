@@ -17,25 +17,24 @@ refs.buttonStart.setAttribute('disabled', 'true');
 let selectedDate = null;
 let timerId = null;
 
-flatpickr(
-  refs.inputText,
-  (options = {
-    enableTime: true,
-    time_24hr: true,
-    defaultDate: new Date(),
-    minuteIncrement: 1,
-    onClose(selectedDates) {
-      selectedDate = selectedDates;
-      console.log(selectedDates[0]);
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    selectedDate = selectedDates;
+    console.log(selectedDates[0]);
 
-      if (Date.parse(selectedDates) <= Date.now()) {
-        Notify.info('Please choose a date in the future');
-      } else {
-        refs.buttonStart.removeAttribute('disabled');
-      }
-    },
-  })
-);
+    if (Date.parse(selectedDates) <= Date.now()) {
+      Notify.info('Please choose a date in the future');
+    } else {
+      refs.buttonStart.removeAttribute('disabled');
+    }
+  },
+};
+
+flatpickr(refs.inputText, options);
 
 function onClickButtonStart() {
   refs.inputText.setAttribute('disabled', 'true');
